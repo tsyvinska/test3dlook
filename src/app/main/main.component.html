@@ -1,0 +1,26 @@
+<section>
+ 
+  <input #searchBox id="search-box" (input)="getRes(searchBox.value, per_page.value)" placeholder="enter your query:"/>
+
+  <select name="per_page" #per_page (change)="getRes(searchBox.value, per_page.value)">
+    <option value="" [disabled]="true">Select quantity</option>
+    <option *ngFor="let amount of amountArray" [value]="amount">
+      {{amount}}
+    </option>
+  </select>
+</section>
+
+<div class="images" *ngIf="data">
+
+  <div class="image" *ngFor="let hit of data.hits" (click)="goToDetail(hit.largeImageURL)">
+    <img src="{{hit.previewURL}}" width="200" height="200" />
+  </div>
+
+  <p *ngIf="data.total==0">
+    There are no images that suits your criteria
+  </p>
+</div>
+
+
+ 
+
