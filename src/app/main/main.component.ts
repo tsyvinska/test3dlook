@@ -28,14 +28,15 @@ export class MainComponent implements OnInit {
     });
 
     //отслеживаем изменение значений формы
-    this.searchForm.valueChanges.subscribe(val => {
+    this.searchForm.valueChanges.pipe(
+      debounceTime(1500))
+      .subscribe(val => {
       this.isEmpty = false;
-
       if (val.search !== "") {
         this.isLoading = true;
         this.HttpService.getRes(val.search, val.amount)
           .pipe(
-          debounceTime(5000),
+          
           takeUntil(this.destroyService$),
           finalize(() => {
             this.isLoading = false;
