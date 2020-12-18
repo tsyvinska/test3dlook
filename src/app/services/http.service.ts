@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-
+import { ApiData } from '../api-data';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getRes(search_query: any, amount: any) {
+  getRes(search_query: string, amount: string): Observable<ApiData> {
     
     const params = new HttpParams({
       fromObject:
@@ -24,7 +25,7 @@ export class HttpService {
       }
     });
 
-    return (this.http.get(this.apiUrl, { params: params }))
+    return (this.http.get<ApiData>(this.apiUrl, { params: params }))
   }
 
 }

@@ -7,13 +7,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./img-detail.component.scss']
 })
 export class ImgDetailComponent implements OnInit {
-  imgUrl:any;
+  imgUrl: string | null | undefined;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.imgUrl = this.route.snapshot.paramMap.get('imgUrl');
-    console.log(this.imgUrl)
   }
 
 }
