@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
-
+import { FormBuilder, FormGroup} from '@angular/forms';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-main',
@@ -10,34 +9,35 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  apiUrl = "https://pixabay.com/api/";
-
+ 
+  searchForm!: FormGroup;
   amountArray: number[] = [10, 20, 50, 100];
-  //amount:any;
-  data:any;
-  totalHits: any;
+  data: any;
+  isLoading: boolean | undefined;
+  isEmpty: boolean | undefined;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private HttpService: HttpService, private router: Router, private fb: FormBuilder, ) { }
 
   ngOnInit(): void {
-
-  }
-
-  getRes(search_query: any, amount: any) {
-    if (search_query=="") {
-      return
-    }
-    const params = new HttpParams({
-      fromObject:
-      {
-        key: "19551405-7629a3016c4b767ad74313939",
-        q: encodeURIComponent(search_query),
-        per_page: amount,
-      }
+    this.searchForm = this.fb.group({
+     search: ['',],
+     amount: ['20',],
     });
 
-    this.http.get(this.apiUrl, { params: params })
-      .subscribe(data => this.data = data);
+    //отслеживаем изменение значений формы
+    this.searchForm.valueChanges.subscribe(val => {
+      this.isEmpty = false;
+      this.isLoading = true;
+
+      if (val.search !== "") {
+        this.HttpService.getRes(val.search, val.amount).subscribe(data => this.data = data);
+        this.isLoading = false;
+      }
+      else {
+        this.isLoading = false;
+        this.isEmpty = true;
+      } 
+    })   
   }
 
   goToDetail(hit: any) {

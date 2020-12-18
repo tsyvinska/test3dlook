@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { ImgDetailComponent } from './img-detail/img-detail.component';
+import { DestroyService } from '../app/services/destroy.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,9 @@ import { ImgDetailComponent } from './img-detail/img-detail.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule 
   ],
-  providers: [],
+  providers: [DestroyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
