@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { HttpService } from '../services/http.service';
+import { DestroyService } from '../services/destroy.service';
+import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +18,7 @@ export class MainComponent implements OnInit {
   isLoading: boolean = false;
   isEmpty: boolean | undefined;
 
-  constructor(private HttpService: HttpService, private router: Router, private fb: FormBuilder, ) { }
+  constructor(private HttpService: HttpService, private destroyService$: DestroyService, private router: Router, private fb: FormBuilder,) { }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
@@ -30,18 +32,26 @@ export class MainComponent implements OnInit {
       this.isLoading = true;
       
       if (val.search !== "") {
-        this.HttpService.getRes(val.search, val.amount).subscribe(data => this.data = data);
-        this.isLoading = false;
+        
+        this.HttpService.getRes(val.search, val.amount)
+          .pipe(
+          debounceTime(5000),
+          takeUntil(this.destroyService$),
+          finalize(() => {
+            this.isLoading = false;
+          })
+            )
+          .subscribe(data => this.data = data);
       }
       else {
-        this.isLoading = false;
         this.isEmpty = true;
       } 
     })   
   }
 
-  goToDetail(hit: any) {
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/img/detail', { imgUrl: hit }]));
+
+  goToDetail(largeImageURL: string) {
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/img/detail', { imgUrl: largeImageURL }]));
     window.open(url, '_blank');
   }
   

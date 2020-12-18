@@ -14,7 +14,7 @@
     </form>
   </section>
 
-  <div class="images" *ngIf="data">
+  <div class="images" *ngIf="data&&!isLoading">
 
     <div class="image" *ngFor="let hit of data.hits" (click)="goToDetail(hit.largeImageURL)">
       <img src="{{hit.previewURL}}" width="200" height="200" />
