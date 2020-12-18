@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   isLoading: boolean = false;
   isEmpty: boolean | undefined;
 
-  constructor(private HttpService: HttpService, private destroyService$: DestroyService, private router: Router, private fb: FormBuilder,) { }
+  constructor(private httpService: HttpService, private destroyService$: DestroyService, private router: Router, private fb: FormBuilder,) { }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
@@ -29,15 +29,17 @@ export class MainComponent implements OnInit {
 
     //отслеживаем изменение значений формы
     this.searchForm.valueChanges.pipe(
-      debounceTime(1500))
+      debounceTime(1500),
+      takeUntil(this.destroyService$))
+
       .subscribe(val => {
       this.isEmpty = false;
       if (val.search !== "") {
         this.isLoading = true;
-        this.HttpService.getRes(val.search, val.amount)
+        this.httpService.getRes(val.search, val.amount)
           .pipe(
-          
-          takeUntil(this.destroyService$),
+            
+            
           finalize(() => {
             this.isLoading = false;
           })
