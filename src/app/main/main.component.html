@@ -14,10 +14,6 @@
     </form>
   </section>
 
-
-
-
-
   <div class="images" *ngIf="data">
 
     <div class="image" *ngFor="let hit of data.hits" (click)="goToDetail(hit.largeImageURL)">
@@ -29,7 +25,8 @@
     </p>
   </div>
 
+  <app-loader [isLoading]="isLoading"></app-loader>
 
-  <div *ngIf="isLoading" class="loader"></div>
+  
   <div *ngIf="isEmpty&&!data">Please, enter your query</div>
 </div>

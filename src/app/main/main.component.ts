@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
   searchForm!: FormGroup;
   amountArray: number[] = [10, 20, 50, 100];
   data: any;
-  isLoading: boolean | undefined;
+  isLoading: boolean = false;
   isEmpty: boolean | undefined;
 
   constructor(private HttpService: HttpService, private router: Router, private fb: FormBuilder, ) { }
@@ -28,7 +28,7 @@ export class MainComponent implements OnInit {
     this.searchForm.valueChanges.subscribe(val => {
       this.isEmpty = false;
       this.isLoading = true;
-
+      
       if (val.search !== "") {
         this.HttpService.getRes(val.search, val.amount).subscribe(data => this.data = data);
         this.isLoading = false;
