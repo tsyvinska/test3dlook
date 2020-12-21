@@ -13,20 +13,14 @@
 
     </form>
   </section>
-
-  <div class="images" *ngIf="data&&!isLoading">
-
-    <div class="image" *ngFor="let hit of data.hits" (click)="goToDetail(hit.largeImageURL)">
+  <div class="images" *ngIf="(data$ | async) && !isLoading">
+    <div class="image" *ngFor="let hit of (data$ | async)?.hits" (click)="goToDetail(hit.largeImageURL)">
       <img src="{{hit.previewURL}}" width="200" height="200" />
     </div>
-
-    <p *ngIf="data.total==0">
+    <p *ngIf="(data$ | async)?.total == 0">
       There are no images that suits your criteria
     </p>
   </div>
-
   <app-loader [isLoading]="isLoading"></app-loader>
-
-  
-  <div *ngIf="isEmpty&&!data">Please, enter your query</div>
+  <div *ngIf="isEmpty && (data$ | async)">Please, enter your query</div>
 </div>
