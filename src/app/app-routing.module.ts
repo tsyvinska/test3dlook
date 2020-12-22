@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
-import { ImgDetailComponent } from './img-detail/img-detail.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent
   },
-  { path: 'img/detail', component: ImgDetailComponent },
+
+  { path: 'detail', loadChildren: () => import('./detail/detail.module').then(m => m.DetailModule) },
 ];
 
 @NgModule({

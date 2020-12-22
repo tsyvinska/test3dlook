@@ -1,13 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-img-detail',
-  templateUrl: './img-detail.component.html',
-  styleUrls: ['./img-detail.component.scss'],
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImgDetailComponent implements OnInit {
+export class DetailComponent implements OnInit {
   imgUrl: string | null | undefined;
 
   constructor(private route: ActivatedRoute) { }
@@ -15,7 +15,7 @@ export class ImgDetailComponent implements OnInit {
   ngOnInit(): void {
     //this.imgUrl = this.route.snapshot.params.imgUrl;
     //this.imgUrl = this.route.snapshot.paramMap.get('imgUrl');
-  
+
     this.route.queryParams.subscribe(params => {
       this.imgUrl = params['imgUrl'];
     });

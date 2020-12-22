@@ -15,7 +15,7 @@
   </section>
   <div class="images" *ngIf="(data$ | async) && !(isLoading$ | async)">
 
-    <a class="image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/img/detail']" [queryParams]="{'imgUrl': hit.largeImageURL}">
+    <a class="image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/detail']" [queryParams]="{'imgUrl': hit.largeImageURL}">
      <img src="{{hit.previewURL}}" width="200" height="200" /> 
     </a>
 
