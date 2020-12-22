@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-loader',
@@ -8,7 +9,7 @@ import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } 
 })
 export class LoaderComponent implements OnInit {
 
-  @Input()  isLoading: boolean | undefined;
+  @Input() isLoading = false;
 
   constructor() { }
 

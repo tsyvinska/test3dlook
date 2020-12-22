@@ -18,8 +18,8 @@ export class MainComponent implements OnInit {
   searchForm!: FormGroup;
   amountArray: string[] = ["10", "20", "50", "100"];
   data$ = new BehaviorSubject<ApiData | null>(null);
-  isLoading: boolean = false;
-  isEmpty: boolean | undefined;
+  isLoading$ = new BehaviorSubject<boolean>(false);
+  isEmpty$ = new BehaviorSubject<boolean>(false);
 
   constructor(private httpService: HttpService, private destroyService$: DestroyService, private router: Router, private fb: FormBuilder,) { }
 
@@ -32,15 +32,15 @@ export class MainComponent implements OnInit {
     //отслеживаем изменение значений формы
     this.searchForm.valueChanges.pipe(debounceTime(1500),takeUntil(this.destroyService$))
       .subscribe(val => {
-      this.isEmpty = false;
+      this.isEmpty$.next(false);
       if (val.search !== "") {
-        this.isLoading = true;
+        this.isLoading$.next(true);
         this.httpService.getRes(val.search, val.amount)
-        .pipe(finalize(() => { this.isLoading = false; }))
+        .pipe(finalize(() => { this.isLoading$.next(false); }))
         .subscribe(data => this.data$.next(data));
       }
       else {
-        this.isEmpty = true;
+        this.isEmpty$.next(true);
       } 
     })   
   }
