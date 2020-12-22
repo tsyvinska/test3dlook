@@ -13,7 +13,12 @@ export class ImgDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.imgUrl = this.route.snapshot.paramMap.get('imgUrl');
+    //this.imgUrl = this.route.snapshot.params.imgUrl;
+    //this.imgUrl = this.route.snapshot.paramMap.get('imgUrl');
+  
+    this.route.queryParams.subscribe(params => {
+      this.imgUrl = params['imgUrl'];
+    });
   }
 
 }

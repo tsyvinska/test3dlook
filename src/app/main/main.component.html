@@ -14,9 +14,11 @@
     </form>
   </section>
   <div class="images" *ngIf="(data$ | async) && !(isLoading$ | async)">
-    <div class="image" *ngFor="let hit of (data$ | async)?.hits" (click)="goToDetail(hit.largeImageURL)">
-      <img src="{{hit.previewURL}}" width="200" height="200" />
-    </div>
+
+    <a class="image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/img/detail']" [queryParams]="{'imgUrl': hit.largeImageURL}">
+     <img src="{{hit.previewURL}}" width="200" height="200" /> 
+    </a>
+
     <p *ngIf="(data$ | async)?.total == 0">
       There are no images that suits your criteria
     </p>
