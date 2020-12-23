@@ -1,24 +1,19 @@
 <div class="container">
   <section>
     <form [formGroup]="searchForm">
-
-      <input formControlName="search" placeholder="enter your query">
-
-      <select formControlName="amount">
+      <input formControlName="search" placeholder="enter your query" #search>
+      <select formControlName="amount" #amount>
         <option value="" [disabled]="true">quantity per page</option>
         <option *ngFor="let amount of amountArray" [value]="amount">
           {{amount}}
         </option>
       </select>
-
     </form>
   </section>
   <div class="images" *ngIf="(data$ | async) && !(isLoading$ | async)">
-
     <a class="image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/detail']" [queryParams]="{'imgUrl': hit.largeImageURL}">
      <img src="{{hit.previewURL}}" width="200" height="200" /> 
     </a>
-
     <p *ngIf="(data$ | async)?.total == 0">
       There are no images that suits your criteria
     </p>

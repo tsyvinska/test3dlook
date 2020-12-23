@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { DestroyService } from '../services/destroy.service';
@@ -20,35 +20,48 @@ export class MainComponent implements OnInit {
   data$ = new BehaviorSubject<ApiData | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   isEmpty$ = new BehaviorSubject<boolean>(false);
+  query: string="";
+  amount: string="20";
 
-  constructor(private httpService: HttpService, private destroyService$: DestroyService, private router: Router, private fb: FormBuilder,) { }
+  constructor(private httpService: HttpService,
+              private destroyService$: DestroyService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private fb: FormBuilder) {
+    if (this.route.snapshot.queryParamMap.get('search')) {
+    this.query = this.route.snapshot.queryParamMap.get('search');
+    this.amount = this.route.snapshot.queryParamMap.get('amount');
+    this.doSearch(this.query, this.amount);
+    }
+  }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-     search: ['',],
-     amount: ['20',],
+      search: [this.query,],
+      amount: [this.amount,],
     });
 
     //отслеживаем изменение значений формы
     this.searchForm.valueChanges.pipe(debounceTime(1500),takeUntil(this.destroyService$))
       .subscribe(val => {
       this.isEmpty$.next(false);
-      if (val.search !== "") {
-        this.isLoading$.next(true);
-        this.httpService.getRes(val.search, val.amount)
-        .pipe(finalize(() => { this.isLoading$.next(false); }))
-        .subscribe(data => this.data$.next(data));
-      }
-      else {
-        this.isEmpty$.next(true);
-      } 
-    })   
+        if (val.search !== "") {         
+          this.doSearch(val.search, val.amount)
+        }
+        else {
+          this.isEmpty$.next(true);
+        }
+      })   
   }
 
-  goToDetail(largeImageURL: string) {
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/img/detail', { imgUrl: largeImageURL }]));
-    window.open(url, '_blank');
+  doSearch(search: string, amount: string) {
+    this.isLoading$.next(true);
+    this.httpService.getRes(search, amount)
+      .pipe(finalize(() => { this.isLoading$.next(false); }))
+      .subscribe(data => this.data$.next(data));
+    this.router.navigate([''], { queryParams: { search: search, amount: amount } })
   }
+
   
 }
 
