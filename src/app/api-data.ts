@@ -4,6 +4,8 @@ export interface ApiData {
   hits: [{
     pageURL: string,
     previewURL:string,
-    largeImageURL:string
+    largeImageURL: string,
+    id: number;
+    tags: string;
     }]
 }

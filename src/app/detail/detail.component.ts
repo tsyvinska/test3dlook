@@ -1,21 +1,34 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { HttpService } from '../services/http.service';
+import { DestroyService } from '../services/destroy.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
 })
-export class DetailComponent implements OnInit {
-  imgUrl: string | null | undefined;
 
-  constructor(private route: ActivatedRoute) { }
+export class DetailComponent implements OnInit {
+  data$ = new BehaviorSubject<any | null>(null);
+  arr$ = new BehaviorSubject<any | null>(null);
+ 
+  constructor(private route: ActivatedRoute, private httpService: HttpService, private destroyService$: DestroyService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.imgUrl = params['imgUrl'];
-    });
+    this.route.queryParams
+      .pipe(takeUntil(this.destroyService$))
+      .subscribe(params => {
+      this.httpService.getImage(params['id'])
+        .subscribe(data => (this.data$.next(data), this.arr$.next((data.hits[0].tags).split(",").map(el => el.trim()))));
+      });
   }
 
-}
+  }
+
+

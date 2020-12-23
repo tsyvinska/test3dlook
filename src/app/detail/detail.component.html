@@ -1,3 +1,14 @@
-<div>
-  <img src="{{imgUrl}}" />
+
+<div class="container">
+  <div class="container" *ngFor="let hit of (data$ | async)?.hits">
+    <div>user: {{hit.user}}</div>
+    <div class="userImage"><img src="{{hit.userImageURL}}" /></div>
+    <div>likes:  {{hit.likes}}</div>
+    <div>favorites: {{hit.favorites}}</div>
+    <div>downloads: {{hit.downloads}}</div>
+    <img src="{{hit.largeImageURL}}" />
+  </div>
+  <a *ngFor="let tag of (arr$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
+    {{tag}}
+  </a>
 </div>

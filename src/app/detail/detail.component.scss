@@ -2,3 +2,22 @@ div {
   display: flex;
   justify-content: center;
 }
+.container {
+  display: flex;
+  flex-direction:column;
+}
+.userImage {
+  //background-color: gainsboro;
+  //border-radius: 50%;
+  //width: 75px;
+  //height: 75px;
+  //display:flex;
+  // justify-content:center;
+  //align-items: center;
+  img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border: 3px solid gainsboro;
+  }
+}

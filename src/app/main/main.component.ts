@@ -11,7 +11,8 @@ import { BehaviorSubject, Observable, Subject} from 'rxjs';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
 })
 export class MainComponent implements OnInit {
  
