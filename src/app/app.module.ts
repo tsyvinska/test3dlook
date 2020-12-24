@@ -10,7 +10,7 @@ import { LoaderModule } from './loader/loader.module';
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,   
+    MainComponent
   ],
   imports: [
     BrowserModule,

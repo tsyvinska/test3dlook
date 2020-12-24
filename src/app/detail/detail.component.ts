@@ -26,7 +26,7 @@ constructor(private route: ActivatedRoute, private httpService: HttpService, pri
       .pipe(takeUntil(this.destroyService$))
       .subscribe(params => {
      this.isLoading$.next(true);
-     this.httpService.getImage(params['id'])
+     this.httpService.getImage(params.id)
       .pipe(finalize(() => { this.isLoading$.next(false); }))
       .subscribe(data => (this.data$.next(data), this.arr$.next((data.hits[0].tags).split(',').map((el: string) => el.trim()))));
       });

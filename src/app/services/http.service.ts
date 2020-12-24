@@ -24,7 +24,7 @@ export class HttpService {
         per_page: amount,
       }
     });
-    return (this.http.get<ApiData>(this.apiUrl, { params: params }));
+    return (this.http.get<ApiData>(this.apiUrl, { params }));
   }
 
   getImage(imgId: any): Observable<ApiData> {
@@ -37,6 +37,6 @@ export class HttpService {
       }
       }
     );
-    return (this.http.get<ApiData>(this.apiUrl, { params: params }));
+    return (this.http.get<ApiData>(this.apiUrl, { params }));
   }
 }

@@ -52,12 +52,12 @@ export class MainComponent implements OnInit {
       });
   }
 
-  doSearch(search: string, amount: string) {
+  doSearch(search: string, amount: string): void {
     this.isLoading$.next(true);
     this.httpService.getRes(search, amount)
       .pipe(finalize(() => { this.isLoading$.next(false); }))
       .subscribe(data => this.data$.next(data));
-    this.router.navigate([''], { queryParams: { search: search, amount: amount } });
+    this.router.navigate([''], { queryParams: { search, amount } });
   }
 }
 
