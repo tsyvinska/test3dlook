@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.route.snapshot.queryParamMap.get('search')) {
-      this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('search'));
+      this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('amount') || "20");
     }
 
     this.searchForm = this.fb.group({
