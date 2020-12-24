@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { finalize } from 'rxjs/internal/operators/finalize';
 
-
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',

@@ -5,19 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoaderComponent } from './loader/loader.component';
+import { LoaderModule } from './loader/loader.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    LoaderComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
