@@ -6,7 +6,8 @@ import { LoaderModule } from '../loader/loader.module';
 
 @NgModule({
   declarations: [
-    DetailComponent],  
+    DetailComponent
+  ],
   imports: [
     CommonModule,
     DetailRoutingModule,
