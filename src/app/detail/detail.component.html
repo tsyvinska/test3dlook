@@ -1,14 +1,20 @@
 
-<div class="container">
-  <div class="container" *ngFor="let hit of (data$ | async)?.hits">
-    <div>user: {{hit.user}}</div>
-    <div class="userImage"><img src="{{hit.userImageURL}}" /></div>
-    <div>likes:  {{hit.likes}}</div>
-    <div>favorites: {{hit.favorites}}</div>
-    <div>downloads: {{hit.downloads}}</div>
-    <img src="{{hit.largeImageURL}}" />
+  <div *ngIf="(data$ | async) && !(isLoading$ | async)">
+    <div class="flex-row" *ngFor="let hit of (data$ | async)?.hits">
+      <div class="flex-col detail-info">
+        <div class="userName">{{hit.user}}</div>
+        <div class="userImage"><img src="{{hit.userImageURL}}" /></div>
+        <div><i class="fas fa-heart"></i>{{hit.likes}}</div>
+        <div><i class="fas fa-thumbs-up"></i>{{hit.favorites}}</div>
+        <div><i class="fas fa-file-export"></i>{{hit.downloads}}</div>
+        <div class="tags flex-row">
+          <a *ngFor="let tag of (arr$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
+            {{tag}}
+          </a>
+        </div>
+      </div>
+      <img src="{{hit.largeImageURL}}" />
+    </div>
   </div>
-  <a *ngFor="let tag of (arr$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
-    {{tag}}
-  </a>
-</div>
+  <app-loader [isLoading]="isLoading$ | async"></app-loader>
+

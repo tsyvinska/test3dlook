@@ -1,23 +1,68 @@
-div {
+
+
+.flex-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
-.container {
+
+.flex-col {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
+
 .userImage {
-  //background-color: gainsboro;
-  //border-radius: 50%;
-  //width: 75px;
-  //height: 75px;
-  //display:flex;
-  // justify-content:center;
-  //align-items: center;
   img {
     border-radius: 50%;
     width: 70px;
     height: 70px;
     border: 3px solid gainsboro;
+  }
+}
+
+.userName, .userImage {
+  align-self: center;
+}
+
+.fas {
+  color: gainsboro;
+  margin: 0 10px;
+}
+
+.fa-heart {
+  color: red;
+}
+
+img {
+  width: 70vw;
+  max-height: 95vh;
+  object-fit: contain
+}
+
+.tags {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+a {
+  padding: 3px 7px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  background-color: gainsboro;
+  color: darkgrey;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.detail-info {
+  flex-basis: 20%;
+  background-color: aliceblue;
+  border-radius: 15px;
+  padding: 20px 40px;
+  height: 300px;
+
+  div {
+    margin-top: 15px;
   }
 }

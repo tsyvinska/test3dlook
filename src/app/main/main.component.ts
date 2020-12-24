@@ -21,25 +21,22 @@ export class MainComponent implements OnInit {
   data$ = new BehaviorSubject<ApiData | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   isEmpty$ = new BehaviorSubject<boolean>(false);
-  query: string="";
-  amount: string="20";
 
   constructor(private httpService: HttpService,
               private destroyService$: DestroyService,
               private router: Router,
               private route: ActivatedRoute,
-              private fb: FormBuilder) {
-    if (this.route.snapshot.queryParamMap.get('search')) {
-    this.query = this.route.snapshot.queryParamMap.get('search');
-    this.amount = this.route.snapshot.queryParamMap.get('amount');
-    this.doSearch(this.query, this.amount);
-    }
-  }
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
+
+    if (this.route.snapshot.queryParamMap.get('search')) {
+      this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('search'));
+    }
+
     this.searchForm = this.fb.group({
-      search: [this.query,],
-      amount: [this.amount,],
+      search: [this.route.snapshot.queryParamMap.get('search') || "",],
+      amount: [this.route.snapshot.queryParamMap.get('amount') || "20",],
     });
 
     //отслеживаем изменение значений формы
