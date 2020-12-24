@@ -19,17 +19,17 @@ export class DetailComponent implements OnInit {
   isLoading$ = new BehaviorSubject<boolean>(false);
   data$ = new BehaviorSubject<any | null>(null);
   arr$ = new BehaviorSubject<any | null>(null);
- 
-  constructor(private route: ActivatedRoute, private httpService: HttpService, private destroyService$: DestroyService) { }
+
+constructor(private route: ActivatedRoute, private httpService: HttpService, private destroyService$: DestroyService) { }
 
   ngOnInit(): void {
     this.route.queryParams
       .pipe(takeUntil(this.destroyService$))
       .subscribe(params => {
-      this.isLoading$.next(true);
-        this.httpService.getImage(params['id'])
-        .pipe(finalize(() => { this.isLoading$.next(false); }))
-        .subscribe(data => (this.data$.next(data), this.arr$.next((data.hits[0].tags).split(",").map((el: string) => el.trim()))));
+     this.isLoading$.next(true);
+     this.httpService.getImage(params['id'])
+      .pipe(finalize(() => { this.isLoading$.next(false); }))
+      .subscribe(data => (this.data$.next(data), this.arr$.next((data.hits[0].tags).split(',').map((el: string) => el.trim()))));
       });
   }
 

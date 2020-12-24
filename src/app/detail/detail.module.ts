@@ -12,7 +12,6 @@ import { LoaderComponent } from './loader/loader.component';
   imports: [
     CommonModule,
     DetailRoutingModule,
-    
   ]
 })
 export class DetailModule { }

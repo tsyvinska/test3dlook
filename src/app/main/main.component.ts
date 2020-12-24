@@ -15,41 +15,41 @@ import { BehaviorSubject, Observable, Subject} from 'rxjs';
   providers: [DestroyService],
 })
 export class MainComponent implements OnInit {
- 
   searchForm!: FormGroup;
-  amountArray: string[] = ["10", "20", "50", "100"];
+  amountArray: string[] = ['10', '20', '50', '100'];
   data$ = new BehaviorSubject<ApiData | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   isEmpty$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private httpService: HttpService,
-              private destroyService$: DestroyService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private fb: FormBuilder) {}
+  constructor(
+    private httpService: HttpService,
+    private destroyService$: DestroyService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder) {}
 
   ngOnInit(): void {
 
     if (this.route.snapshot.queryParamMap.get('search')) {
-      this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('amount') || "20");
+      this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('amount') || '20');
     }
 
-    this.searchForm = this.fb.group({
-      search: [this.route.snapshot.queryParamMap.get('search') || "",],
-      amount: [this.route.snapshot.queryParamMap.get('amount') || "20",],
+    this.searchForm = this.fb.group ({
+      search: [this.route.snapshot.queryParamMap.get('search') || '', ],
+      amount: [this.route.snapshot.queryParamMap.get('amount') || '20', ],
     });
 
-    //отслеживаем изменение значений формы
-    this.searchForm.valueChanges.pipe(debounceTime(1500),takeUntil(this.destroyService$))
+   // отслеживаем изменение значений формы
+    this.searchForm.valueChanges.pipe(debounceTime(1500), takeUntil(this.destroyService$))
       .subscribe(val => {
-      this.isEmpty$.next(false);
-        if (val.search !== "") {         
-          this.doSearch(val.search, val.amount)
+        this.isEmpty$.next(false);
+        if (val.search !== '') {
+          this.doSearch(val.search, val.amount);
         }
         else {
           this.isEmpty$.next(true);
         }
-      })   
+      });
   }
 
   doSearch(search: string, amount: string) {
@@ -57,10 +57,8 @@ export class MainComponent implements OnInit {
     this.httpService.getRes(search, amount)
       .pipe(finalize(() => { this.isLoading$.next(false); }))
       .subscribe(data => this.data$.next(data));
-    this.router.navigate([''], { queryParams: { search: search, amount: amount } })
+    this.router.navigate([''], { queryParams: { search: search, amount: amount } });
   }
-
-  
 }
 
 
