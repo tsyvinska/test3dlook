@@ -10,7 +10,7 @@
       </select>
     </form>
   </section>
-  <div class="search-result" *ngIf="(data$ | async) && !(isLoading$ | async)">
+  <div class="search-result" *ngIf="(data$ | async) && !(loader$ | async)">
     <a class="search-result_image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/detail']" [queryParams]="{'imgUrl': hit.largeImageURL, 'id': hit.id}">
      <img src="{{hit.previewURL}}" width="200" height="200" /> 
     </a>
@@ -18,6 +18,6 @@
       There are no images that suits your criteria
     </p>
   </div>
-  <app-loader [isLoading] = "isLoading$ | async"></app-loader>
+  <app-loader [isLoading] = "loader$ | async"></app-loader>
   <div *ngIf="(isEmpty$ | async) && (data$ | async)">Please, enter your query</div>
 </div>

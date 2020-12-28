@@ -9,6 +9,7 @@ import { LoaderModule } from './loader/loader.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { reducer } from './state/loader/loader.reducer';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     ReactiveFormsModule,
     LoaderModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({loader: reducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
