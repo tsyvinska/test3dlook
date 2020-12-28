@@ -1,19 +1,19 @@
 
   <ng-container *ngIf="(data$ | async) else loading">
-    <div class="flex-row" *ngFor="let hit of (data$ | async)?.hits">
-      <div class="flex-col detail-info">
-        <div class="userName">{{hit.user}}</div>
-        <div class="userImage"><img src="{{hit.userImageURL}}" /></div>
-        <div><i class="fas fa-heart"></i>{{hit.likes}}</div>
-        <div><i class="fas fa-thumbs-up"></i>{{hit.favorites}}</div>
-        <div><i class="fas fa-file-export"></i>{{hit.downloads}}</div>
-        <div class="tags flex-row">
-          <a *ngFor="let tag of (arr$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
+    <div class="detail-container" *ngFor="let hit of (data$ | async)?.hits">
+      <div class="detail-info">
+        <div class="detail-info_userName">{{hit.user}}</div>
+        <div class="detail-info_userImage"><img src="{{hit.userImageURL}}" /></div>
+        <div class="detail-info_icon"><i class="fas fa-heart"></i>{{hit.likes}}</div>
+        <div class="detail-info_icon"><i class="fas fa-thumbs-up"></i>{{hit.favorites}}</div>
+        <div class="detail-info_icon"><i class="fas fa-file-export"></i>{{hit.downloads}}</div>
+        <div class="detail-info_tags flex-row">
+          <a class="detail-info_link" *ngFor="let tag of (arr$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
             {{tag}}
           </a>
         </div>
       </div>
-      <img src="{{hit.largeImageURL}}" />
+      <img class="detail-container_img" src="{{hit.largeImageURL}}" />
     </div>
   </ng-container>
     

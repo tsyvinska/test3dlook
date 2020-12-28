@@ -1,27 +1,62 @@
-
-
-.flex-row {
+.detail-container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-}
 
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.userImage {
-  img {
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    border: 3px solid gainsboro;
+  &_img {
+    width: 70vw;
+    max-height: 95vh;
+    object-fit: contain
   }
 }
 
-.userName, .userImage {
-  align-self: center;
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 20%;
+  background-color: aliceblue;
+  border-radius: 15px;
+  padding: 20px 40px;
+  height: 300px;
+
+  &_userName {
+    margin-top: 15px;
+    align-self: center;
+  }
+
+  &_userImage {
+    margin-top: 15px;
+    align-self: center;
+
+    img {
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      border: 3px solid gainsboro;
+    }
+  }
+
+  &_icon {
+    margin-top: 15px;
+  }
+
+  &_tags {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &_link {
+    padding: 3px 7px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: gainsboro;
+    color: darkgrey;
+    text-decoration: none;
+    border-radius: 5px;
+  }
 }
 
 .fas {
@@ -31,38 +66,4 @@
 
 .fa-heart {
   color: red;
-}
-
-img {
-  width: 70vw;
-  max-height: 95vh;
-  object-fit: contain
-}
-
-.tags {
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-a {
-  padding: 3px 7px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  background-color: gainsboro;
-  color: darkgrey;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.detail-info {
-  flex-basis: 20%;
-  background-color: aliceblue;
-  border-radius: 15px;
-  padding: 20px 40px;
-  height: 300px;
-
-  div {
-    margin-top: 15px;
-  }
 }

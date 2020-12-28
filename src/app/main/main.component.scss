@@ -1,30 +1,27 @@
-section {
-  width: 50%;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
   height: 40px;
   padding: 20px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+
+  &_input {
+    margin-left: 20px;
+  }
 }
 
-select {
-  margin-left: 20px;
-}
-.container {
-  display: flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-
-.images {
+.search-result {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+
+  &_image {
+    margin: 10px;
+  }
 }
-
-.image {
-  margin: 10px;
-}
-
-
