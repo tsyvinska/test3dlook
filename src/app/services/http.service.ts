@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiData } from '../api-data';
-import { Observable, throwError } from 'rxjs';
-import { resultMemoize, Store } from '@ngrx/store';
-import { DataActionTypes, DataActions, LoadSearchResults, LoadSearchResultsFail, LoadSearchResultsSuccess } from '../state/data/data.actions';
+import { throwError } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { LoadSearchResults, LoadSearchResultsFail, LoadSearchResultsSuccess } from '../state/data/data.actions';
 import { catchError } from 'rxjs/operators';
 
 
@@ -26,14 +26,7 @@ export class HttpService {
         q: encodeURIComponent(searchQuery),
         per_page: amount,
       }});
-
-    this.store.dispatch(new LoadSearchResults());
-    this.http.get<ApiData>(this.apiUrl, { params })
-      .pipe(catchError((e) => {
-        this.store.dispatch(new LoadSearchResultsFail(e))
-        return throwError(e);
-      } ))
-      .subscribe((result) => this.store.dispatch(new LoadSearchResultsSuccess(result)))
+    this.dispatchSearchRes(params);
   }
 
   getImage(imgId: any): void {
@@ -43,9 +36,11 @@ export class HttpService {
       {
         key: this.key,
         id: imgId,
-      }}
-    );
+      }});
+    this.dispatchSearchRes(params);
+  }
 
+  dispatchSearchRes(params: HttpParams) {
     this.store.dispatch(new LoadSearchResults());
     this.http.get<ApiData>(this.apiUrl, { params })
       .pipe(catchError((e) => {
@@ -54,4 +49,5 @@ export class HttpService {
       }))
       .subscribe((result) => this.store.dispatch(new LoadSearchResultsSuccess(result)))
   }
+
 }

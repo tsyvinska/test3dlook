@@ -35,6 +35,9 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.loader$ = this.store.pipe(select(getLoader));
     this.data$ = this.store.pipe(select(getSearchResults));
+    //this.loader$ = this.store.pipe(select(state => state.search.loading));
+    //this.data$ = this.store.pipe(select(state => state.search.data));
+
 
     if (this.route.snapshot.queryParamMap.get('search')) {
       this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('amount') || '20');
