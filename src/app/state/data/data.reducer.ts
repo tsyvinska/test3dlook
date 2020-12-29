@@ -4,11 +4,13 @@ import { ApiData } from '../../api-data';
 
 export interface State {
   data: ApiData;
+  loading: boolean;
   error: any;
 }
 
 export const initialState: State = {
   data: null,
+  loading: false,
   error: null
 };
 
@@ -17,6 +19,7 @@ export function reducer(state = initialState, action: DataActions): State {
     case DataActionTypes.LoadSearchResults: {
       return {
         ...state,
+        loading: true,
         error: null
       };
     }
@@ -25,6 +28,7 @@ export function reducer(state = initialState, action: DataActions): State {
       return {
         ...state,
         data: action.payload,
+        loading: false,
         error: null
       };
     }
@@ -32,6 +36,7 @@ export function reducer(state = initialState, action: DataActions): State {
     case DataActionTypes.LoadSearchResultsFail: {
       return {
         ...state,
+        loading: false,
         error: action.payload
       };
     }

@@ -8,7 +8,7 @@
         <div class="detail-info_icon"><i class="fas fa-thumbs-up"></i>{{hit.favorites}}</div>
         <div class="detail-info_icon"><i class="fas fa-file-export"></i>{{hit.downloads}}</div>
         <div class="detail-info_tags flex-row">
-          <a class="detail-info_link" *ngFor="let tag of (arr$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
+          <a class="detail-info_link" *ngFor="let tag of (tags$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
             {{tag}}
           </a>
         </div>

@@ -8,6 +8,11 @@ export interface ApiData {
       largeImageURL: string;
       id: number;
       tags: string;
+      userImageURL: string;
+      user: string;
+      likes: number;
+      favorites: number;
+      downloads: number;
     }
   ];
 }

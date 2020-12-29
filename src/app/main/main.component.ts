@@ -7,7 +7,6 @@ import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 import { ApiData } from '../api-data';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { StartLoader, StopLoader } from '../state/loader/loader.actions';
 import { rootReducer, GlobalState, Actions } from '../state/reducers';
 
 @Component({
@@ -20,7 +19,6 @@ import { rootReducer, GlobalState, Actions } from '../state/reducers';
 export class MainComponent implements OnInit {
   searchForm!: FormGroup;
   amountArray: string[] = ['10', '20', '50', '100'];
-  isLoading$ = new BehaviorSubject<boolean>(false);
   loader$: Observable<boolean>;
   data$: Observable<ApiData>;
   isEmpty$ = new BehaviorSubject<boolean>(false);
@@ -34,7 +32,7 @@ export class MainComponent implements OnInit {
     private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.loader$ = this.store.pipe(select(state => state.loader.isOn));
+    this.loader$ = this.store.pipe(select(state => state.search.loading));
     this.data$ = this.store.pipe(select(state => state.search.data));
 
     if (this.route.snapshot.queryParamMap.get('search')) {
@@ -57,14 +55,10 @@ export class MainComponent implements OnInit {
           this.isEmpty$.next(true);
         }
       });
-
-    
   }
 
   doSearch(search: string, amount: string): void {
-    this.store.dispatch(new StartLoader());
     this.httpService.getRes(search, amount)
-    this.store.dispatch(new StopLoader());
     this.router.navigate([''], { queryParams: { search, amount } });
   }
 }
