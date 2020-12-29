@@ -8,6 +8,7 @@ import { ApiData } from '../api-data';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { rootReducer, GlobalState, Actions } from '../state/reducers';
+import { getLoader, getSearchResults } from '../state/data/data.selector';
 
 @Component({
   selector: 'app-main',
@@ -32,8 +33,8 @@ export class MainComponent implements OnInit {
     private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.loader$ = this.store.pipe(select(state => state.search.loading));
-    this.data$ = this.store.pipe(select(state => state.search.data));
+    this.loader$ = this.store.pipe(select(getLoader));
+    this.data$ = this.store.pipe(select(getSearchResults));
 
     if (this.route.snapshot.queryParamMap.get('search')) {
       this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('amount') || '20');

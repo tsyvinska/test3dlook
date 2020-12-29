@@ -6,8 +6,9 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { Observable } from 'rxjs';
 import { ApiData } from '../api-data';
-import { rootReducer, GlobalState, Actions } from '../state/reducers';
+import { rootReducer, GlobalState} from '../state/reducers';
 import { Store, select } from '@ngrx/store';
+import { getLoader, getSearchResults, getTages } from '../state/data/data.selector';
 
 @Component({
   selector: 'app-detail',
@@ -29,8 +30,9 @@ export class DetailComponent implements OnInit {
     private destroyService$: DestroyService) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.pipe(select(state => state.search.loading));
-    this.data$ = this.store.pipe(select(state => state.search.data));
+    this.isLoading$ = this.store.pipe(select(getLoader));
+    this.data$ = this.store.pipe(select(getSearchResults));
+    //this.tags$ = this.store.pipe(select(getTages)).split(',').map((el: string) => el.trim());
     this.tags$ = this.store.pipe(select(state => state.search.data.hits[0].tags.split(',').map((el: string) => el.trim())));
 
     this.route.queryParams
