@@ -2,12 +2,12 @@
   <ng-container *ngIf="(data$ | async) else loading">
     <div class="detail" *ngFor="let hit of (data$ | async)?.hits">
       <div class="detail_info">
-        <div class="detail_userName">{{hit.user}}</div>
-        <div class="detail_userImage"><img src="{{hit.userImageURL}}" /></div>
+        <div class="detail_user-name">{{hit.user}}</div>
+        <img class="detail_user-image" src="{{hit.userImageURL}}"/>
         <div class="detail_icon"><i class="fas fa-heart"></i>{{hit.likes}}</div>
         <div class="detail_icon"><i class="fas fa-thumbs-up"></i>{{hit.favorites}}</div>
         <div class="detail_icon"><i class="fas fa-file-export"></i>{{hit.downloads}}</div>
-        <div class="detail_tags flex-row">
+        <div class="detail_tags">
           <a class="detail_link" *ngFor="let tag of (tags$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
             {{tag}}
           </a>

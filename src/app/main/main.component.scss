@@ -1,27 +1,29 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+:host {
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.form {
-  height: 40px;
-  padding: 20px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+    &_form {
+      height: 40px;
+      padding: 20px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
 
-  &_input {
-    margin-left: 20px;
-  }
-}
+    &_input {
+      margin-left: 20px;
+    }
 
-.search-result {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+    &_search-result {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
 
-  &_image {
-    margin: 10px;
+      &-image {
+        margin: 10px;
+      }
+    }
   }
 }

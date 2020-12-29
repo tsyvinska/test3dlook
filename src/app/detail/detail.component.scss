@@ -1,69 +1,69 @@
-.detail {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
 
-  &_img {
-    width: 70vw;
-    max-height: 95vh;
-    object-fit: contain
-  }
-
-  &_info {
+:host {
+  .detail {
     display: flex;
-    flex-direction: column;
-    flex-basis: 20%;
-    background-color: aliceblue;
-    border-radius: 15px;
-    padding: 20px 40px;
-    height: 350px;
-  }
+    justify-content: space-around;
+    flex-wrap: wrap;
 
-  &_userName {
-    margin-top: 15px;
-    align-self: center;
-  }
+    &_img {
+      width: 70vw;
+      max-height: 95vh;
+      object-fit: contain
+    }
 
-  &_userImage {
-    margin-top: 15px;
-    align-self: center;
+    &_info {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 20%;
+      background-color: aliceblue;
+      border-radius: 15px;
+      padding: 20px 40px;
+      height: 350px;
+    }
 
-    img {
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      border: 3px solid gainsboro;
+    &_user-name {
+      margin-top: 15px;
+      align-self: center;
+    }
+
+    &_user-image {
+        margin-top: 15px;
+        align-self: center;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        border: 3px solid gainsboro;
+    }
+
+    &_icon {
+      margin-top: 15px;
+    }
+
+    &_tags {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    &_link {
+      padding: 3px 7px;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      background-color: gainsboro;
+      color: darkgrey;
+      text-decoration: none;
+      border-radius: 5px;
     }
   }
 
-  &_icon {
-    margin-top: 15px;
+  .fas {
+    color: gainsboro;
+    margin: 0 10px;
   }
 
-  &_tags {
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
+  .fa-heart {
+    color: red;
   }
-
-  &_link {
-    padding: 3px 7px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    background-color: gainsboro;
-    color: darkgrey;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-}
-
-.fas {
-  color: gainsboro;
-  margin: 0 10px;
-}
-
-.fa-heart {
-  color: red;
 }

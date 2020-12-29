@@ -1,8 +1,8 @@
-<div class="container">
+<div class="main">
   <section>
-    <form class="form" [formGroup]="searchForm">
+    <form class="main_form" [formGroup]="searchForm">
       <input formControlName="search" placeholder="enter your query" #search>
-      <select class="form_input" formControlName="amount" #amount>
+      <select class="main_input" formControlName="amount" #amount>
         <option value="" [disabled]="true">quantity per page</option>
         <option *ngFor="let amount of amountArray" [value]="amount">
           {{amount}}
@@ -10,8 +10,8 @@
       </select>
     </form>
   </section>
-  <div class="search-result" *ngIf="(data$ | async) && !(loader$ | async)">
-    <a class="search-result_image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/detail']" [queryParams]="{'imgUrl': hit.largeImageURL, 'id': hit.id}">
+  <div class="main_search-result" *ngIf="(data$ | async) && !(loader$ | async)">
+    <a class="main_search-result-image" *ngFor="let hit of (data$ | async)?.hits" [routerLink]="['/detail']" [queryParams]="{'imgUrl': hit.largeImageURL, 'id': hit.id}">
      <img src="{{hit.previewURL}}" width="200" height="200" /> 
     </a>
     <p *ngIf="(data$ | async)?.total == 0">
