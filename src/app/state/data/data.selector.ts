@@ -1,14 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { State } from './data.reducer';
 
-
-export const getLoaderState = createFeatureSelector<State>('loader');
-
-export const getLoader = createSelector(
-  getLoaderState,
-  (state: State) => state.loading
-);
-
 export const getSearchResultsState = createFeatureSelector<State>('search');
 
 export const getSearchResults = createSelector(
@@ -16,9 +8,13 @@ export const getSearchResults = createSelector(
   (state: State) => state.data
 );
 
-export const getTagsState = createFeatureSelector<State>('tags');
+export const getLoader = createSelector(
+  getSearchResultsState,
+(state: State) => state.loading
+);
+
 
 export const getTages = createSelector(
-  getTagsState,
+  getSearchResultsState,
   (state: State) => state.data.hits[0].tags
 );
