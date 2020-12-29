@@ -8,7 +8,7 @@ import { ApiData } from '../api-data';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { StartLoader, StopLoader } from '../state/loader/loader.actions';
-
+import { rootReducer, GlobalState, Actions } from '../state/reducers';
 
 @Component({
   selector: 'app-main',
@@ -20,13 +20,13 @@ import { StartLoader, StopLoader } from '../state/loader/loader.actions';
 export class MainComponent implements OnInit {
   searchForm!: FormGroup;
   amountArray: string[] = ['10', '20', '50', '100'];
-  data$ = new BehaviorSubject<ApiData | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   loader$: Observable<boolean>;
+  data$: Observable<ApiData>;
   isEmpty$ = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private store: Store<any>,
+    private store: Store<GlobalState>,
     private httpService: HttpService,
     private destroyService$: DestroyService,
     private router: Router,
@@ -35,6 +35,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.loader$ = this.store.pipe(select(state => state.loader.isOn));
+    this.data$ = this.store.pipe(select(state => state.search.data));
 
     if (this.route.snapshot.queryParamMap.get('search')) {
       this.doSearch(this.route.snapshot.queryParamMap.get('search'), this.route.snapshot.queryParamMap.get('amount') || '20');
@@ -63,8 +64,7 @@ export class MainComponent implements OnInit {
   doSearch(search: string, amount: string): void {
     this.store.dispatch(new StartLoader());
     this.httpService.getRes(search, amount)
-      .pipe(finalize(() => { this.store.dispatch(new StopLoader()); }))
-      .subscribe(data => this.data$.next(data));
+    this.store.dispatch(new StopLoader());
     this.router.navigate([''], { queryParams: { search, amount } });
   }
 }

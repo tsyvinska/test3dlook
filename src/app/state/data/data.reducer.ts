@@ -3,12 +3,12 @@ import { DataActionTypes, DataActions } from './data.actions';
 import { ApiData } from '../../api-data';
 
 export interface State {
-  data: ApiData[];
+  data: ApiData;
   error: any;
 }
 
 export const initialState: State = {
-  data: [],
+  data: null,
   error: null
 };
 
