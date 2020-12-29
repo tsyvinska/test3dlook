@@ -9,7 +9,7 @@ export const initialState: State = {
   isOn: false
 };
 
-export function reducer(state = initialState, action: LoaderActions): State {
+export function reducer(state = initialState, action: LoaderActions):State {
   switch (action.type) {
     case LoaderActionTypes.StartLoader: {
       return {

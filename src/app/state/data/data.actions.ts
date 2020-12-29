@@ -11,7 +11,7 @@ export class LoadSearchResults implements Action {
 }
 export class LoadSearchResultsSuccess implements Action {
   readonly type = DataActionTypes.LoadSearchResultsSuccess;
-  constructor(public payload: ApiData[]) { }
+  constructor(public payload: ApiData) { }
 }
 export class LoadSearchResultsFail implements Action {
   readonly type = DataActionTypes.LoadSearchResultsFail;
