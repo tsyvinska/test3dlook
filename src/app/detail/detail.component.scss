@@ -1,4 +1,4 @@
-.detail-container {
+.detail {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -8,16 +8,16 @@
     max-height: 95vh;
     object-fit: contain
   }
-}
 
-.detail-info {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 20%;
-  background-color: aliceblue;
-  border-radius: 15px;
-  padding: 20px 40px;
-  height: 350px;
+  &_info {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+    background-color: aliceblue;
+    border-radius: 15px;
+    padding: 20px 40px;
+    height: 350px;
+  }
 
   &_userName {
     margin-top: 15px;
