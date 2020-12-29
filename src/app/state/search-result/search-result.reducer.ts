@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { DataActionTypes, DataActions } from './data.actions';
+import { SearchActionTypes, SearchActions } from './search-result.actions';
 import { ApiData } from '../../api-data';
 
 export interface State {
@@ -14,9 +14,9 @@ export const initialState: State = {
   error: null
 };
 
-export function reducer(state = initialState, action: DataActions): State {
+export function reducer(state = initialState, action: SearchActions): State {
   switch (action.type) {
-    case DataActionTypes.LoadSearchResults: {
+    case SearchActionTypes.LoadSearchResults: {
       return {
         ...state,
         loading: true,
@@ -24,7 +24,7 @@ export function reducer(state = initialState, action: DataActions): State {
       };
     }
 
-    case DataActionTypes.LoadSearchResultsSuccess: {
+    case SearchActionTypes.LoadSearchResultsSuccess: {
       return {
         ...state,
         data: action.payload,
@@ -33,7 +33,7 @@ export function reducer(state = initialState, action: DataActions): State {
       };
     }
 
-    case DataActionTypes.LoadSearchResultsFail: {
+    case SearchActionTypes.LoadSearchResultsFail: {
       return {
         ...state,
         loading: false,

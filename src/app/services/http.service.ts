@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiData } from '../api-data';
 import { throwError } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { LoadSearchResults, LoadSearchResultsFail, LoadSearchResultsSuccess } from '../state/data/data.actions';
+import { LoadSearchResults, LoadSearchResultsFail, LoadSearchResultsSuccess } from '../state/search-result/search-result.actions';
 import { catchError } from 'rxjs/operators';
 
 

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { ApiData } from '../api-data';
 import { rootReducer, GlobalState} from '../state/reducers';
 import { Store, select } from '@ngrx/store';
-import { getLoader, getSearchResults, getTages } from '../state/data/data.selector';
+import { getLoader, getSearchResults, getTages } from '../state/search-result/search-result.selector';
 
 @Component({
   selector: 'app-detail',

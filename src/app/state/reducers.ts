@@ -1,12 +1,12 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { DataActions } from "./data/data.actions";
-import { reducer as DataReducer, State as DataState } from "./data/data.reducer";
+import { SearchActions } from "./search-result/search-result.actions";
+import { reducer as SearchReducer, State as SearchState } from "./search-result/search-result.reducer";
 
-export type Actions = DataActions;
+export type Actions = SearchActions;
 
 export interface GlobalState {
-  search: DataState
+  search: SearchState
 }
 export const rootReducer: ActionReducerMap<GlobalState, Actions> = {
-  search: DataReducer
+  search: SearchReducer
 }

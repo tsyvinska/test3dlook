@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from './data.reducer';
+import { State } from './search-result.reducer';
 
 export const getSearchResultsState = createFeatureSelector<State>('search');
 

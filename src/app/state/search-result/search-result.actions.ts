@@ -1,24 +1,24 @@
 import { Action } from '@ngrx/store';
 import { ApiData } from '../../api-data';
 
-export enum DataActionTypes {
-  LoadSearchResults = '[Data] Load Search Results',
-  LoadSearchResultsSuccess = '[Data] Load Search Results Success',
-  LoadSearchResultsFail = '[Data] Load Search Results Fail',
+export enum SearchActionTypes {
+  LoadSearchResults = '[Search] Load Search Results',
+  LoadSearchResultsSuccess = '[Search] Load Search Results Success',
+  LoadSearchResultsFail = '[Search] Load Search Results Fail',
 }
 export class LoadSearchResults implements Action {
-  readonly type = DataActionTypes.LoadSearchResults;
+  readonly type = SearchActionTypes.LoadSearchResults;
 }
 export class LoadSearchResultsSuccess implements Action {
-  readonly type = DataActionTypes.LoadSearchResultsSuccess;
+  readonly type = SearchActionTypes.LoadSearchResultsSuccess;
   constructor(public payload: ApiData) { }
 }
 export class LoadSearchResultsFail implements Action {
-  readonly type = DataActionTypes.LoadSearchResultsFail;
+  readonly type = SearchActionTypes.LoadSearchResultsFail;
   constructor(public payload: { error: any }) { }
 }
 
-export type DataActions =
+export type SearchActions =
   | LoadSearchResults
   | LoadSearchResultsSuccess
   | LoadSearchResultsFail
