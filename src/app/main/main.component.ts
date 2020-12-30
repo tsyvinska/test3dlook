@@ -1,14 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup} from '@angular/forms';
-import { HttpService } from '../services/http.service';
 import { DestroyService } from '../services/destroy.service';
-import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { ApiData } from '../api-data';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { rootReducer, GlobalState, Actions } from '../state/reducers';
+import { GlobalState } from '../state/reducers';
 import { getLoader, getSearchResults } from '../state/search-result/search-result.selector';
+import { LoadSearchResults } from '../state/search-result/search-result.actions';
 
 @Component({
   selector: 'app-main',
@@ -26,7 +26,6 @@ export class MainComponent implements OnInit {
 
   constructor(
     private store: Store<GlobalState>,
-    private httpService: HttpService,
     private destroyService$: DestroyService,
     private router: Router,
     private route: ActivatedRoute,
@@ -59,7 +58,7 @@ export class MainComponent implements OnInit {
   }
 
   doSearch(search: string, amount: string): void {
-    this.httpService.getRes(search, amount)
+    this.store.dispatch(new LoadSearchResults({ search, amount }));
     this.router.navigate([''], { queryParams: { search, amount } });
   }
 }

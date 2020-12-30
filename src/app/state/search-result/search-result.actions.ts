@@ -8,6 +8,7 @@ export enum SearchActionTypes {
 }
 export class LoadSearchResults implements Action {
   readonly type = SearchActionTypes.LoadSearchResults;
+  constructor(public payload: {search: string; amount: string}) { }
 }
 export class LoadSearchResultsSuccess implements Action {
   readonly type = SearchActionTypes.LoadSearchResultsSuccess;
@@ -21,5 +22,5 @@ export class LoadSearchResultsFail implements Action {
 export type SearchActions =
   | LoadSearchResults
   | LoadSearchResultsSuccess
-  | LoadSearchResultsFail
+  | LoadSearchResultsFail;
 

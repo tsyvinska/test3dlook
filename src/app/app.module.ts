@@ -9,7 +9,8 @@ import { LoaderModule } from './loader/loader.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { rootReducer, GlobalState, Actions } from './state/reducers';
+import { rootReducer, effects } from './state/reducers';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { rootReducer, GlobalState, Actions } from './state/reducers';
     HttpClientModule,
     ReactiveFormsModule,
     LoaderModule,
+    EffectsModule.forRoot(effects),
     StoreModule.forRoot(rootReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
