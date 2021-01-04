@@ -5,10 +5,10 @@ import { DestroyService } from '../services/destroy.service';
 import { takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiData } from '../api-data';
-import { GlobalState} from '../state/reducers';
+import { GlobalState} from '../state/index';
 import { Store, select } from '@ngrx/store';
-import { getImgDetailLoader, getImgDetailResults, getImgDetailTages } from '../state/img-detatail/img-detail.selector';
-import { ImgDetailResults } from '../state/img-detatail/img-detail.actions';
+import { getImgDetailLoader, getImgDetailResults, getImgDetailTages } from '../state/img-detail/img-detail.selector';
+import { ImgDetailResults } from '../state/img-detail/img-detail.actions';
 
 
 @Component({

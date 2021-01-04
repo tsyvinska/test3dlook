@@ -6,7 +6,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { ApiData } from '../api-data';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { GlobalState } from '../state/reducers';
+import { GlobalState } from '../state/index';
 import { getLoader, getSearchResults } from '../state/search-result/search-result.selector';
 import { LoadSearchResults } from '../state/search-result/search-result.actions';
 

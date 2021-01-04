@@ -9,7 +9,7 @@ import { LoaderModule } from './loader/loader.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { rootReducer, effects } from './state/reducers';
+import { rootReducer, effects } from './state/index';
 import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
