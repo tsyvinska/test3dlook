@@ -10,7 +10,6 @@ import { Store, select } from '@ngrx/store';
 import { getImgDetailLoader, getImgDetailResults, getImgDetailTages } from '../state/img-detail/img-detail.selector';
 import { ImgDetailResults } from '../state/img-detail/img-detail.actions';
 
-
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -33,8 +32,7 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading$ = this.store.pipe(select(getImgDetailLoader));
     this.data$ = this.store.pipe(select(getImgDetailResults));
-    this.tags$ = this.store.pipe(select(state => state.imgDetail.data.hits[0].tags.split(',').map((el: string) => el.trim())));
-    //this.tags$ = this.store.pipe(select(getImgDetailTages).split(',').map((el: string) => el.trim())));
+    this.tags$ = this.store.pipe(select(getImgDetailTages));
 
     this.route.queryParams
       .pipe(takeUntil(this.destroyService$))

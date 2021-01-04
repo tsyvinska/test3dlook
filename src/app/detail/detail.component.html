@@ -8,7 +8,7 @@
         <div class="detail_icon"><i class="fas fa-thumbs-up"></i>{{hit.favorites}}</div>
         <div class="detail_icon"><i class="fas fa-file-export"></i>{{hit.downloads}}</div>
         <div class="detail_tags">
-          <a class="detail_link" *ngFor="let tag of (tags$ | async)" [routerLink]="['']" [queryParams]="{search: tag}">
+          <a class="detail_link" *ngFor="let tag of (tags$ | async | stringToArray)" [routerLink]="['']" [queryParams]="{search: tag}">
             {{tag}}
           </a>
         </div>

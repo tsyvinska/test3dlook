@@ -11,6 +11,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { rootReducer, effects } from './state/index';
 import { EffectsModule } from '@ngrx/effects';
+import { PipesModule } from './pipes/pipes.module';
+
 
 @NgModule({
   declarations: [

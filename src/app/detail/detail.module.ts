@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DetailRoutingModule } from './detail-routing.module';
 import { DetailComponent } from './detail.component';
 import { LoaderModule } from '../loader/loader.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { LoaderModule } from '../loader/loader.module';
   imports: [
     CommonModule,
     DetailRoutingModule,
-    LoaderModule
+    LoaderModule,
+    PipesModule
   ]
 })
 export class DetailModule { }
