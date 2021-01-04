@@ -3,8 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\state"
+    "\\src\\app\\detail",
+    "\\src\\app\\loader",
+    "\\src\\app\\main",
+    "\\src\\app\\state",
+    "\\src\\app\\state\\img-detatail",
+    "\\src\\app\\state\\search-result"
   ],
-  "SelectedNode": "\\src\\app\\state\\search-result",
+  "SelectedNode": "\\src\\app\\state\\img-detatail\\img-detail.actions.ts",
   "PreviewInSolutionExplorer": false
 }

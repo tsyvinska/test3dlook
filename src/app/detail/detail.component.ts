@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 import { ApiData } from '../api-data';
 import { GlobalState} from '../state/reducers';
 import { Store, select } from '@ngrx/store';
-import { getLoader, getSearchResults, getTages } from '../state/search-result/search-result.selector';
+import { getImgDetailLoader, getImgDetailResults, getImgDetailTages } from '../state/img-detatail/img-detail.selector';
+import { ImgDetailResults } from '../state/img-detatail/img-detail.actions';
+
 
 @Component({
   selector: 'app-detail',
@@ -29,17 +31,14 @@ export class DetailComponent implements OnInit {
     private destroyService$: DestroyService) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this.store.pipe(select(getLoader));
-    this.data$ = this.store.pipe(select(getSearchResults));
-    this.tags$ = this.store.pipe(select(state => state.search.data.hits[0].tags.split(',').map((el: string) => el.trim())));
+    this.isLoading$ = this.store.pipe(select(getImgDetailLoader));
+    this.data$ = this.store.pipe(select(getImgDetailResults));
+    this.tags$ = this.store.pipe(select(state => state.imgDetail.data.hits[0].tags.split(',').map((el: string) => el.trim())));
+    //this.tags$ = this.store.pipe(select(getImgDetailTages).split(',').map((el: string) => el.trim())));
 
     this.route.queryParams
       .pipe(takeUntil(this.destroyService$))
-      .subscribe(params => {
-        this.httpService.getImage(params.id);
-      });
-  }
-  }
+      .subscribe(params => { this.store.dispatch(new ImgDetailResults({params})); }); }}
 
 
 
