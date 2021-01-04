@@ -15,7 +15,7 @@ export class SearchResutEffects {
   getSearchResut$ = this.actions$.pipe(
     ofType(SearchActionTypes.LoadSearchResults),
     switchMap((action: LoadSearchResults) =>
-      this.httpService.getRes(action.payload.search, action.payload.amount).pipe(
+      this.httpService.getRes$(action.payload.search, action.payload.amount).pipe(
         map((results: ApiData) => new LoadSearchResultsSuccess(results)),
         catchError(error => of(new LoadSearchResultsFail(error)))
       )

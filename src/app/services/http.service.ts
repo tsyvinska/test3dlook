@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getRes(searchQuery: string, amount: string): Observable<ApiData> {
+  getRes$(searchQuery: string, amount: string): Observable<ApiData> {
     const params = new HttpParams({
       fromObject:
       {
@@ -23,7 +23,7 @@ export class HttpService {
     return this.http.get<ApiData>(this.apiUrl, { params });
   }
 
-  getImage(imgId: any): Observable<any> {
+  getImage$(imgId: any): Observable<any> {
     const params = new HttpParams(
       {
       fromObject:

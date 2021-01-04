@@ -15,7 +15,7 @@ export class ImgDetailEffects {
   getImgDetail$ = this.actions$.pipe(
     ofType(ImgDetailActionTypes.ImgDetailResults),
     switchMap((action: ImgDetailResults) =>
-      this.httpService.getImage(action.payload.params.id).pipe(
+      this.httpService.getImage$(action.payload.params.id).pipe(
         map((results: ApiData) => new ImgDetailResultsSuccess(results)),
         catchError(error => of(new ImgDetailResultsFail(error)))
       )
