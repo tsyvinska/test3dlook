@@ -6,10 +6,10 @@
     "\\src\\app\\detail",
     "\\src\\app\\loader",
     "\\src\\app\\main",
-    "\\src\\app\\state",
-    "\\src\\app\\state\\img-detatail",
-    "\\src\\app\\state\\search-result"
+    "\\src\\app\\pipes",
+    "\\src\\app\\services",
+    "\\src\\app\\state"
   ],
-  "SelectedNode": "\\src\\app\\state\\img-detatail\\img-detail.actions.ts",
+  "SelectedNode": "\\src\\app\\main\\main.component.html",
   "PreviewInSolutionExplorer": false
 }
